@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ordersns">
+	<resultMap type="orders" 	id="resultMap">
+		<result property="o_num" column="o_num"/>
+		<result property="c_id" column="c_id"/>
+		<result property="o_add"  column="o_add"/>
+		<result property="o_how"  column="o_how"/>
+		<result property="o_date"  column="o_date"/>
+		<result property="o_price"  column="o_price"/>
+		<result property="o_sta"  	column="o_sta"/>
+	</resultMap>
+	<!-- parameterType : 매개변수, resultType 결과 반환값 -->
+	<select id="insert" parameterType="orders">
+	insert into orders (o_num,c_id,o_date)values
+	(#{o_num},#{c_id},sysdate)
+	</select>
+	<select id="slist" parameterType="string" resultMap="resultMap">
+		select * from shop
+	</select>
+	<select id="findmax" resultType="int">
+		select max(o_num) from orders
+	</select>
+	<select id="checkdata" resultType="int">
+		select nvl(max(o_num),0) from orders
+	</select>
+	<select id="getcusord" parameterType="string" resultMap="resultMap">
+		select * from orders where c_id=#{c_id} order by o_num desc
+	</select>
+	<update id="orderupdate" parameterType="orders">
+		UPDATE ORDERS SET o_add=#{o_add},O_HOW=#{o_how},O_PRICE=#{o_price} WHERE C_ID=#{c_id} AND O_NUM=#{o_num}
+	</update>
+	<select id="oderuplist" parameterType="string" resultMap="resultMap">
+		select * from orders
+	</select>
+	<delete id="ordercancel2" parameterType="int">
+		DELETE FROM ORDERS where O_NUM=#{o_num}
+	</delete>
+	<select id="nullselect" parameterType="string" resultType="int">
+		select o_num from orders where o_how is null;
+	</select>
+</mapper>
+
+

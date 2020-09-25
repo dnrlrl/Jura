@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orderlistns">
+	<resultMap type="order_list" 	id="resultMap">
+		<result property="ol_num" column="ol_num"/>
+		<result property="o_num" column="o_num"/>
+		<result property="s_id" column="s_id"/>
+		<result property="m_num" column="m_num"/>
+		<result property="olm_name" column="olm_name"/>
+		<result property="count" column="count"/>
+		<result property="ol_price" column="ol_price"/>
+		<result property="s_img" column="s_img"/>
+	</resultMap>
+		<insert id="insert" parameterType="order_list">
+			insert into order_list values(order_list_seq.nextval,#{o_num},#{s_id},#{m_num},#{olm_name},#{count},#{ol_price})
+		</insert>
+		<select id="olist" parameterType="int" resultMap="resultMap">
+			select * from order_list where o_num=#{o_num}
+		</select>
+		<select id="juraoli" parameterType="hashmap" resultType="order_list">
+			UPDATE ORDER_LIST SET OL_PRICE=#{odprice}, COUNT=${count} where O_NUM=#{ordernum}
+		</select>
+		<delete id="ordercancel" parameterType="int" >
+			DELETE FROM order_list where o_num=#{o_num}
+		</delete>
+		<delete id="olclean" parameterType="int">
+			delete from order_list where o_num=#{o_num}
+		</delete>
+		<select id="getsid" parameterType="list" resultType="string">
+			select distinct s_id from order_list 
+			where o_num in
+        		<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            		#{item.value}
+        		</foreach>
+		</select>
+</mapper>

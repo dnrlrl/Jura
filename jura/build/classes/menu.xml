@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menuns">
+	<resultMap type="menu" 	id="resultMap">
+		<result property="m_num"    column="m_num"/>
+		<result property="s_id"     column="s_id"/>
+		<result property="m_name"   column="m_name"/>
+		<result property="m_price"  column="m_price"/>
+		<result property="rec_menu" column="rec_menu"/>
+		<result property="m_img"  	column="m_img"/>
+	</resultMap>
+	<!-- parameterType : 매개변수, resultType 결과 반환값 -->
+	<select id="list" parameterType="string" resultMap="resultMap">
+		select * from menu where s_id=#{s_id}
+	</select>
+</mapper>
+
+

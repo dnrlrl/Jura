@@ -1,0 +1,149 @@
+@charset "UTF-8";
+<style><link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous"></style>
+
+/* reset */
+h1 {
+	color: white;
+	line-height: 75px;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+/* common */
+.category-menu clearfix {
+	width: 1170px;
+	margin: 0 auto;
+}
+
+.clearfix {
+	content: '';
+	display: block;
+	clear: both;
+} /* ?? 삭제할듯 */
+
+/* header */
+ .nav {
+	height: 75px;
+	background-color: #ff8000;
+	border: 1px solid #ffffff;
+	position: fixed;
+	width: 100%;
+	z-index: 9999;
+	top: 0;
+	left: 0;
+}
+
+.menu {
+	float: center;
+}
+
+.menu li {
+	
+}
+
+.menu a {
+	line-height: 75px;
+	color: whitel;
+	padding: 0 15px;
+	display: block;
+}
+
+.btn-login {
+	position: relative;
+	top: 0;
+	left: 0;
+	margin: 15px 0 7px 0;
+	width: 150px;
+	max-height: 40px;
+	padding: 7px 0;
+	text-align: center;
+	font-size: 15px;
+	color: #fff;
+	border-radius: 2px;
+	background: #ff8000;
+	border: 1px solid #ffffff;
+}
+.navbar{
+	background-color: #ff8000;
+}
+
+input, button, select, textarea {
+	font-family: inherit;
+}
+
+content {
+	top:75px;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	letter-spacing: 0;
+	font-family: '맑은고딕', malgun gothic, '돋움', Dotum, 'Apple SD Gothic Neo',
+		Helvetica, sans-serif;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;} */
+    
+    
+    
+    
+
+ html, body {
+    padding: 0;
+    margin: 0;
+}
+body {
+    -webkit-transition: all 0.375s ease;
+    transition: all 00.375s ease;
+}
+html, body {
+    width: auto !important;
+    min-width: 320px;
+    letter-spacing: 0;
+    font-family: '맑은고딕', malgun gothic,'돋움',Dotum,'Apple SD Gothic Neo',Helvetica,sans-serif;
+}
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+body {
+    margin: 0;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+*, ::before, ::after {
+    color: #000 !important;
+    text-shadow: none !important;
+    background: transparent !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+html {
+    font-size: 10px;
+}
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+} 

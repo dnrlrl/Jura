@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="customerns">
+	<resultMap type="customer" 	id="resultMap">
+		<result property="c_id" column="c_id"/>
+		<result property="c_pass" column="c_pass"/>
+		<result property="c_name"  	column="c_name"/>
+		<result property="add_num"  column="add_num"/>
+		<result property="c_address"  column="c_address"/>
+		<result property="c_tel"  	column="c_tel"/>
+		<result property="del"  	column="del"/>
+		<result property="joindate" column="joindate"/>
+	</resultMap>
+	<!-- parameterType : 매개변수, resultType 결과 반환값 -->
+	<select id="select" parameterType="string" resultType="customer">
+		select * from customer where c_id=#{c_id}
+	</select>
+	<select id="selectid" parameterType="string" resultType="integer">
+		select count(*) from customer where c_id=#{c_id}
+	</select>
+	<select id="getadd" parameterType="string" resultType="string">
+		select c_address from customer where c_id=#{c_id}
+	</select>
+	<select id="pscheck" parameterType="string" resultType="string">
+		select c_pass from customer where c_id=#{c_id}
+	</select>
+	<insert id="insert" parameterType="customer">
+		insert into customer values(#{c_id},#{c_pass},#{c_name},#{add_num},#{c_address},#{c_tel},'n',sysdate)
+	</insert>
+	<select id="selectadd" parameterType="string" resultType="int">
+		select add_num from customer where c_id=#{c_id}
+	</select>
+	<update id="update" parameterType="customer">
+		update customer set c_pass=#{c_pass},c_name=#{c_name},add_num=#{add_num},
+			c_tel=#{c_tel},c_address=#{c_address} where c_id=#{c_id}
+	</update>
+	<update id="deleteid" parameterType="string">
+		update customer set del='y' where c_id=#{c_id}
+	</update>
+	<select id="deletecheck" parameterType="string" resultType="string">
+		select del from customer where c_id=#{c_id}
+	</select>
+	<!-- MasterService sql -->
+	<select id="clist" parameterType="string" resultMap="resultMap">
+		<!-- select * from (select rowNum rn, a.* 
+		from (select * from customer order by del, c_id, add_num, sysdate) a) 
+		where rn between #{startRow} and #{endRow} -->
+		select * from customer
+	</select>
+	
+</mapper>
+
+

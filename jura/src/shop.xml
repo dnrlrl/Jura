@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shopns">
+	<resultMap type="shop" 	id="resultMap">
+		<result property="s_id" column="s_id "/>
+		<result property="s_name" column="s_name"/>
+		<result property="add_num"  column="add_num"/>
+		<result property="s_add"  column="s_add"/>
+		<result property="s_tel"  column="s_tel"/>
+		<result property="s_img"  	column="s_img"/>
+		<result property="j_type"  	column="j_type"/>
+		<result property="n_type" column="n_type"/>
+		<result property="s_del" column="s_del"/>
+	</resultMap>
+	<!-- parameterType : 매개변수, resultType 결과 반환값 -->
+	<select id="list" parameterType="hashmap" resultMap="resultMap">
+		select * from shop where n_type =#{n_type} and add_num=#{add_nu} and s_del='n'
+	</select>
+	<select id="juralist" parameterType="hashmap" resultMap="resultMap">
+		select * from shop where add_num=#{add_num} and j_type=#{j_type} and s_del='n'
+	</select>
+	<select id="alljuralist" parameterType="int" resultMap="resultMap">
+		select * from shop where add_num=#{add_num} and s_del='n'
+	</select>
+	<select id="slist" parameterType="string" resultMap="resultMap">
+		select * from shop
+	</select>
+ 	<insert id="insert" parameterType="shop">
+		insert into shop values(shop_seq.nextval,#{s_name},#{add_num},#{s_add},#{s_tel},#{s_img},#{j_type},#{n_type},'n')
+	</insert>
+		<update id="update" parameterType="shop">
+		update Shop set s_name=#{s_name}, add_num=#{add_num},s_tel=#{s_tel},s_add=#{s_add}, s_img=#{s_img}, j_type=#{j_type}, n_type=#{n_type}, s_del=#{s_del} where s_id=#{s_id}
+	</update>
+	<select id="addsel" parameterType="string" resultType="string">
+		select s_add from shop where s_id=#{s_id}
+	</select>
+	<select id="select" parameterType="string" resultType="shop">
+		select * from shop where s_id=#{s_id}
+	</select>
+	<select id="getsimg" parameterType="list" resultMap="resultMap">
+			select * from shop where s_id in 
+        		<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+            		#{item}
+        		</foreach>
+		</select>
+	<select id="gets_img" parameterType="string" resultType="string">
+		select s_img from shop where s_id=#{s_id}
+	</select>
+</mapper>
+
+

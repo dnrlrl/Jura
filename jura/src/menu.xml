@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menuns">
+	<resultMap type="menu" 	id="resultMap">
+		<result property="m_num"    column="m_num"/>
+		<result property="s_id"     column="s_id"/>
+		<result property="m_name"   column="m_name"/>
+		<result property="m_price"  column="m_price"/>
+		<result property="rec_menu" column="rec_menu"/>
+		<result property="m_img"  	column="m_img"/>
+	</resultMap>
+	<!-- parameterType : 매개변수, resultType 결과 반환값 -->
+	<select id="list" parameterType="string" resultMap="resultMap">
+		select * from menu where s_id=#{s_id}
+	</select>
+	<select id="getrecmenu" parameterType="string" resultType="Integer">
+		select * from menu where s_id=#{s_id} and rec_menu='y'
+	</select>
+	<select id="mgetrecmenu" parameterType="string" resultType="Integer">
+		select m_num from menu where s_id=#{s_id} and rec_menu='y'
+	</select>
+	<select id="mgetreccount" parameterType="string" resultType="Integer">
+		select count(*) from menu where s_id=#{s_id} and rec_menu='y'
+	</select>
+	<select id="getrecmenuinfo" parameterType="int" resultType="menu">
+		select * from menu where m_num=#{m_num}
+	</select>
+	<insert id="insert" parameterType="menu" >
+		insert into menu values(menu_seq.nextval,#{s_id},#{m_name},#{m_price},#{rec_menu},#{m_img})
+	</insert>
+	<update id="update" parameterType="menu">
+		update menu set m_name=#{m_name}, m_price=#{m_price},m_img=#{m_img},rec_menu=#{rec_menu} where m_num=#{m_num}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete from Menu where m_num=#{m_num}
+		<!-- 엥간하면 DB는 대문자로 표기하셈 회사가면 뚝빼기 나감  I,L 헷갈려서 나중에 죽음
+		SELCET * FROM MENU WHERE M_NUM=#{M_NUM} 이걸로 습관 ㄱㄱ
+		 -->
+	</delete>
+	<select id="selectname" parameterType="string" resultType="string">
+		SELECT M_NAME FROM MENU WHERE M_NUM=#{M_NUM}
+	</select>
+	<update id="deleterec" parameterType="int">
+		update menu set rec_menu='n' where m_num=#{m_num}
+	</update>
+	<update id="updaterec" parameterType="int">
+		update menu set rec_menu='y' where m_num=#{m_num}
+	</update>
+	<select id="getImg" parameterType="int" resultType="string">
+		select m_img from menu where m_num=#{m_num}
+	</select>
+</mapper>
+
+
